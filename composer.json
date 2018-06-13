@@ -1,6 +1,6 @@
 {
-    "name": "magento/module-sample-payment-gateway",
-    "description": "Demonstrates integration with payment gateway",
+    "name": "paypay/mb_way",
+    "description": "Payment with MB WAY by PayPay",
     "require": {
         "php": "~5.5.0|~5.6.0|~7.0.0",
         "magento/module-sales": "100.0.*",
@@ -18,7 +18,7 @@
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
-            "Magento\\SamplePaymentGateway\\": ""
+            "PayPay\\mb_way\\": ""
         }
     }
 }
