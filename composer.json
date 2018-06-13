@@ -20,6 +20,5 @@
         "psr-4": {
             "PayPay\\mb_way\\": ""
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
