@@ -57,7 +57,7 @@
                 <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
                 <paymentInfoKeys>FRAUD_MSG_LIST</paymentInfoKeys>
                 <privateInfoKeys>FRAUD_MSG_LIST</privateInfoKeys>
-            </paypay_gateway>
+            </paypay_gateway_1>
         </payment>
     </default>
 </config>
