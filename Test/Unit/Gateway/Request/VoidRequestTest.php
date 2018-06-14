@@ -3,13 +3,13 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Mbway\Test\Unit\Gateway\Request;
+namespace Magento\SamplePaymentGateway\Test\Unit\Gateway\Request;
 
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Gateway\Data\OrderAdapterInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Sales\Model\Order\Payment;
-use Paypay\Mbway\Gateway\Request\VoidRequest;
+use Magento\SamplePaymentGateway\Gateway\Request\VoidRequest;
 
 class VoidRequestTest extends \PHPUnit_Framework_TestCase
 {

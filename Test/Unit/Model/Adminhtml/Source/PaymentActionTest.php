@@ -3,10 +3,10 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Mbway\Test\Unit\Model\Adminhtml\Source;
+namespace Magento\SamplePaymentGateway\Test\Unit\Model\Adminhtml\Source;
 
 use Magento\Payment\Model\Method\AbstractMethod;
-use Paypay\Mbway\Model\Adminhtml\Source\PaymentAction;
+use Magento\SamplePaymentGateway\Model\Adminhtml\Source\PaymentAction;
 
 class PaymentActionTest extends \PHPUnit_Framework_TestCase
 {

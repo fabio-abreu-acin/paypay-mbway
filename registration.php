@@ -6,6 +6,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Mbway',
+    'Magento_SamplePaymentGateway',
     __DIR__
 );

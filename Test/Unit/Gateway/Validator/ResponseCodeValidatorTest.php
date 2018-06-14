@@ -3,12 +3,12 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Mbway\Test\Unit\Gateway\Validator;
+namespace Magento\SamplePaymentGateway\Test\Unit\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\ResultInterface;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;
-use Paypay\Mbway\Gateway\Http\Client\ClientMock;
-use Paypay\Mbway\Gateway\Validator\ResponseCodeValidator;
+use Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock;
+use Magento\SamplePaymentGateway\Gateway\Validator\ResponseCodeValidator;
 
 class ResponseCodeValidatorTest extends \PHPUnit_Framework_TestCase
 {

@@ -3,10 +3,10 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Mbway\Test\Unit\Model\Ui;
+namespace Magento\SamplePaymentGateway\Test\Unit\Model\Ui;
 
-use Paypay\Mbway\Gateway\Http\Client\ClientMock;
-use Paypay\Mbway\Model\Ui\ConfigProvider;
+use Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock;
+use Magento\SamplePaymentGateway\Model\Ui\ConfigProvider;
 
 class ConfigProviderTest extends \PHPUnit_Framework_TestCase
 {

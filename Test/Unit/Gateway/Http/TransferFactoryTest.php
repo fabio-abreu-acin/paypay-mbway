@@ -3,12 +3,12 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Mbway\Test\Unit\Gateway\Http;
+namespace Magento\SamplePaymentProvider\Test\Unit\Gateway\Http;
 
 use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferInterface;
-use Paypay\Mbway\Gateway\Http\TransferFactory;
-use Paypay\Mbway\Gateway\Request\MockDataRequest;
+use Magento\SamplePaymentGateway\Gateway\Http\TransferFactory;
+use Magento\SamplePaymentGateway\Gateway\Request\MockDataRequest;
 
 class TransferFactoryTest extends \PHPUnit_Framework_TestCase
 {
