@@ -21,7 +21,7 @@
 
                 <order_status>pending_payment</order_status>
                 <payment_action>authorize</payment_action>
-                <title>PayPay 2</title>
+                <title>Cartão de Crédito</title>
                 <currency>EUR</currency>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
@@ -46,7 +46,7 @@
 
                 <order_status>pending_payment</order_status>
                 <payment_action>authorize</payment_action>
-                <title>PayPay 1</title>
+                <title>Multibanco</title>
                 <currency>EUR</currency>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
