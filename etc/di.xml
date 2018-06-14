@@ -8,135 +8,135 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- Payment Method Facade configuration -->
-    <virtualType name="SamplePaymentGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+    <virtualType name="PaypayFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\Magento\SamplePaymentGateway\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="code" xsi:type="const">\Magento\Paypay\Model\Ui\ConfigProvider::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
-            <argument name="infoBlockType" xsi:type="string">Magento\SamplePaymentGateway\Block\Info</argument>
-            <argument name="valueHandlerPool" xsi:type="object">SamplePaymentGatewayValueHandlerPool</argument>
-            <argument name="commandPool" xsi:type="object">SamplePaymentGatewayCommandPool</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Paypay\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">PaypayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">PaypayCommandPool</argument>
         </arguments>
     </virtualType>
 
     <!-- Configuration reader -->
-    <virtualType name="SamplePaymentGatewayConfig" type="Magento\Payment\Gateway\Config\Config">
+    <virtualType name="PaypayConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\Magento\SamplePaymentGateway\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\Magento\Paypay\Model\Ui\ConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
-    <!-- Logger, initialized with SamplePaymentGatewayConfig -->
-    <virtualType name="SamplePaymentGatewayLogger" type="Magento\Payment\Model\Method\Logger">
+    <!-- Logger, initialized with PaypayConfig -->
+    <virtualType name="PaypayLogger" type="Magento\Payment\Model\Method\Logger">
         <arguments>
-            <argument name="config" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="config" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </virtualType>
 
-    <type name="Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock">
+    <type name="Magento\Paypay\Gateway\Http\Client\ClientMock">
         <arguments>
-            <argument name="logger" xsi:type="object">SamplePaymentGatewayLogger</argument>
+            <argument name="logger" xsi:type="object">PaypayLogger</argument>
         </arguments>
     </type>
 
     <!-- Commands infrastructure -->
-    <virtualType name="SamplePaymentGatewayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+    <virtualType name="PaypayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="authorize" xsi:type="string">SamplePaymentGatewayAuthorizeCommand</item>
-                <item name="capture" xsi:type="string">SamplePaymentGatewayCaptureCommand</item>
-                <item name="void" xsi:type="string">SamplePaymentGatewayVoidCommand</item>
+                <item name="authorize" xsi:type="string">PaypayAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">PaypayCaptureCommand</item>
+                <item name="void" xsi:type="string">PaypayVoidCommand</item>
             </argument>
         </arguments>
     </virtualType>
 
     <!-- Authorize command -->
-    <virtualType name="SamplePaymentGatewayAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+    <virtualType name="PaypayAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">SamplePaymentGatewayAuthorizationRequest</argument>
-            <argument name="handler" xsi:type="object">SamplePaymentGatewayResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">PaypayAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">PaypayResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Magento\Paypay\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\Paypay\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Authorization Request -->
-    <virtualType name="SamplePaymentGatewayAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+    <virtualType name="PaypayAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">Magento\SamplePaymentGateway\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">Magento\SamplePaymentGateway\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">Magento\Paypay\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">Magento\Paypay\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="Magento\SamplePaymentGateway\Gateway\Request\AuthorizationRequest">
+    <type name="Magento\Paypay\Gateway\Request\AuthorizationRequest">
         <arguments>
-            <argument name="config" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="config" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </type>
 
     <!-- Capture command -->
-    <virtualType name="SamplePaymentGatewayCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+    <virtualType name="PaypayCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">Magento\Paypay\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">Magento\Paypay\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">Magento\Paypay\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Magento\Paypay\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Magento\Paypay\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="Magento\SamplePaymentGateway\Gateway\Request\CaptureRequest">
+    <type name="Magento\Paypay\Gateway\Request\CaptureRequest">
         <arguments>
-            <argument name="config" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="config" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </type>
 
     <!-- Void command -->
-    <virtualType name="SamplePaymentGatewayVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+    <virtualType name="PaypayVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">Magento\SamplePaymentGateway\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">Magento\Paypay\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">Magento\Paypay\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">Magento\Paypay\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Magento\Paypay\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Magento\Paypay\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="Magento\SamplePaymentGateway\Gateway\Request\VoidRequest">
+    <type name="Magento\Paypay\Gateway\Request\VoidRequest">
         <arguments>
-            <argument name="config" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="config" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </type>
 
     <!-- Response handlers -->
-    <virtualType name="SamplePaymentGatewayResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+    <virtualType name="PaypayResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">Magento\SamplePaymentGateway\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">Magento\SamplePaymentGateway\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">Magento\Paypay\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">Magento\Paypay\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
 
     <!-- Value handlers infrastructure -->
-    <virtualType name="SamplePaymentGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+    <virtualType name="PaypayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="default" xsi:type="string">SamplePaymentGatewayConfigValueHandler</item>
+                <item name="default" xsi:type="string">PaypayConfigValueHandler</item>
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="SamplePaymentGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+    <virtualType name="PaypayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
         <arguments>
-            <argument name="configInterface" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="configInterface" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </virtualType>
 
-    <type name="Magento\SamplePaymentGateway\Block\Info">
+    <type name="Magento\Paypay\Block\Info">
         <arguments>
-            <argument name="config" xsi:type="object">SamplePaymentGatewayConfig</argument>
+            <argument name="config" xsi:type="object">PaypayConfig</argument>
         </arguments>
     </type>
 
