@@ -13,7 +13,7 @@ use Magento\Paypay\Gateway\Http\Client\ClientMock;
  */
 final class ConfigProvider implements ConfigProviderInterface
 {
-    const CODE = 'sample_gateway';
+    const CODE = 'paypay_gateway';
 
     /**
      * Retrieve assoc array of checkout configuration

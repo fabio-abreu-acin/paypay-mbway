@@ -27,7 +27,7 @@ define(
             },
 
             getCode: function() {
-                return 'sample_gateway';
+                return 'paypay_gateway';
             },
 
             getData: function() {
@@ -40,7 +40,7 @@ define(
             },
 
             getTransactionResults: function() {
-                return _.map(window.checkoutConfig.payment.sample_gateway.transactionResults, function(value, key) {
+                return _.map(window.checkoutConfig.payment.paypay_gateway.transactionResults, function(value, key) {
                     return {
                         'value': key,
                         'transaction_result': value

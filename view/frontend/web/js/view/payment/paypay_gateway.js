@@ -16,8 +16,8 @@ define(
         'use strict';
         rendererList.push(
             {
-                type: 'sample_gateway',
-                component: 'Magento_Paypay/js/view/payment/method-renderer/sample_gateway'
+                type: 'paypay_gateway',
+                component: 'Magento_Paypay/js/view/payment/method-renderer/paypay_gateway'
             }
         );
         /** Add view logic here if needed */
