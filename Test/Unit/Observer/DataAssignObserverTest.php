@@ -3,15 +3,15 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Paypay_Mbway\Test\Unit\Observer;
+namespace Paypay\Mbway\Test\Unit\Observer;
 
 use Magento\Framework\DataObject;
 use Magento\Framework\Event;
 use Magento\Payment\Model\InfoInterface;
 use Magento\Payment\Model\MethodInterface;
 use Magento\Payment\Observer\AbstractDataAssignObserver;
-use Paypay\Paypay_Mbway\Gateway\Http\Client\ClientMock;
-use Paypay\Paypay_Mbway\Observer\DataAssignObserver;
+use Paypay\Mbway\Gateway\Http\Client\ClientMock;
+use Paypay\Mbway\Observer\DataAssignObserver;
 
 class DataAssignObserverTest extends \PHPUnit_Framework_TestCase
 {

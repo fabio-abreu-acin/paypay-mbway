@@ -13,7 +13,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Paypay_Mbway/payment/form',
+                template: 'Mbway/payment/form',
                 transactionResult: ''
             },
 

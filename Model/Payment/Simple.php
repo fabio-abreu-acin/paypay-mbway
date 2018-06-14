@@ -1,5 +1,5 @@
 <?php
-namespace Paypay_Mbway\Payment\Model\Payment;
+namespace Mbway\Payment\Model\Payment;
 
 class Simple extends \Magento\Payment\Model\Method\Cc
 {

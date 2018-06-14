@@ -3,11 +3,11 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Paypay_Mbway\Block;
+namespace Paypay\Mbway\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
-use Paypay\Paypay_Mbway\Gateway\Response\FraudHandler;
+use Paypay\Mbway\Gateway\Response\FraudHandler;
 
 class Info extends ConfigurableInfo
 {

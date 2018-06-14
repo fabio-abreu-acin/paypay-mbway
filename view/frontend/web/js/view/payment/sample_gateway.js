@@ -17,7 +17,7 @@ define(
         rendererList.push(
             {
                 type: 'sample_gateway',
-                component: 'Paypay_Mbway/js/view/payment/method-renderer/sample_gateway'
+                component: 'Mbway/js/view/payment/method-renderer/sample_gateway'
             }
         );
         /** Add view logic here if needed */

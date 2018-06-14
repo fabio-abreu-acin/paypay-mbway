@@ -3,10 +3,10 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Paypay_Mbway\Model\Ui;
+namespace Paypay\Mbway\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Paypay\Paypay_Mbway\Gateway\Http\Client\ClientMock;
+use Paypay\Mbway\Gateway\Http\Client\ClientMock;
 
 /**
  * Class ConfigProvider

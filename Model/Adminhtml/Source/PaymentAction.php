@@ -3,7 +3,7 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Paypay_Mbway\Model\Adminhtml\Source;
+namespace Paypay\Mbway\Model\Adminhtml\Source;
 
 use Magento\Payment\Model\Method\AbstractMethod;
 

@@ -3,11 +3,11 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Paypay\Paypay_Mbway\Test\Unit\Gateway\Response;
+namespace Paypay\Mbway\Test\Unit\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Sales\Model\Order\Payment;
-use Paypay\Paypay_Mbway\Gateway\Response\TxnIdHandler;
+use Paypay\Mbway\Gateway\Response\TxnIdHandler;
 
 class TxnIdHandlerTest extends \PHPUnit_Framework_TestCase
 {

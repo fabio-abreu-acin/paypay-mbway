@@ -5,7 +5,7 @@
         <payment>
             <simple>
                 <active>1</active>
-                <model>Paypay_Mbway\Payment\Model\Payment\Simple</model>
+                <model>Mbway\Payment\Model\Payment\Simple</model>
                 <order_status>pending</order_status>
                 <title>Simple</title>
                 <allowspecific>0</allowspecific>
