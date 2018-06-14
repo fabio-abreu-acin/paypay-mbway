@@ -3,14 +3,14 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
-            <simple>
+            <mbway>
                 <active>1</active>
                 <model>Mbway\Payment\Model\Payment\Simple</model>
                 <order_status>pending</order_status>
                 <title>Simple</title>
                 <allowspecific>0</allowspecific>
                 <group>Offline</group>
-            </simple>
+            </mbway>
         </payment>
     </default>
 </config>
