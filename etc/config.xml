@@ -17,6 +17,7 @@
                 <paypay_key></paypay_key>
                 <paypay_code></paypay_code>
                 <paypay_vat></paypay_vat>
+                <paypay_environment>beta</paypay_environment>
 
                 <order_status>pending_payment</order_status>
                 <payment_action>authorize</payment_action>
