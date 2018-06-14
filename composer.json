@@ -1,5 +1,5 @@
 {
-    "name": "paypay/mb_way",
+    "name": "paypay/mbway",
     "description": "Payment with MB WAY by PayPay",
     "homepage": "https://www.paypay.pt",
     "require": {
@@ -14,7 +14,7 @@
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
-            "PayPay\\mb_way\\": ""
+            "PayPay\\mbway\\": ""
         }
     },
     "minimum-stability": "dev"
