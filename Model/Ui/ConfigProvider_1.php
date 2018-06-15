@@ -9,7 +9,7 @@ use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Paypay\Gateway\Http\Client\ClientMock;
 
 /**
- * Class ConfigProvider
+ * Class ConfigProvider_1
  */
 final class ConfigProvider_1 implements ConfigProviderInterface
 {
