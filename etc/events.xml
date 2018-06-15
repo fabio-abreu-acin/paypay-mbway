@@ -8,6 +8,9 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="payment_method_assign_data">
-        <observer name="paypay_gateway_data_assign" instance="Magento\Paypay\Observer\DataAssignObserver" />
+        <observer name="sample_payment_gateway_data_assign" instance="Magento\Paypay\Observer\DataAssignObserver" />
+    </event>
+    <event name="admin_system_config_changed_section_general">
+        <observer name="custom_admin_system_config_changed_section_general" instance="Magento\Paypay\Observer\ConfigObserver"/>
     </event>
 </config>
