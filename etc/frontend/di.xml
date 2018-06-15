@@ -8,13 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
-            <argument name="configProviders_1" xsi:type="array">
-                <item name="paypay_gateway_config_provider_1" xsi:type="object">Magento\Paypay\Model\Ui\ConfigProvider_1</item>
-            </argument>
-        </arguments>
-    </type>
-    <type name="Magento\Checkout\Model\CompositeConfigProvider">
-        <arguments>
             <argument name="configProviders" xsi:type="array">
                 <item name="paypay_gateway_config_provider" xsi:type="object">Magento\Paypay\Model\Ui\ConfigProvider</item>
             </argument>

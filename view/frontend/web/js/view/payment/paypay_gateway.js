@@ -18,10 +18,6 @@ define(
             {
                 type: 'paypay_gateway',
                 component: 'Magento_Paypay/js/view/payment/method-renderer/paypay_gateway'
-            },
-            {
-                type: 'paypay_gateway_1',
-                component: 'Magento_Paypay/js/view/payment/method-renderer/paypay_gateway_1'
             }
         );
         /** Add view logic here if needed */

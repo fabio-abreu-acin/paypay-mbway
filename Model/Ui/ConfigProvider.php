@@ -5,13 +5,13 @@
  */
 namespace Magento\Paypay\Model\Ui;
 
-use Magento\Payment\Model\MethodInterface;
+use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Paypay\Gateway\Http\Client\ClientMock;
 
 /**
  * Class ConfigProvider
  */
-final class ConfigProvider implements MethodInterface
+final class ConfigProvider implements ConfigProviderInterface
 {
     const CODE = 'paypay_gateway';
 
