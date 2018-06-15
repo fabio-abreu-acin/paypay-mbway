@@ -11,7 +11,7 @@ use Magento\Paypay\Gateway\Http\Client\ClientMock;
 /**
  * Class ConfigProvider
  */
-final class ConfigProvider implements ConfigProviderInterface
+final class ConfigProvider implements Magento\Payment\Model\MethodInterface
 {
     const CODE = 'paypay_gateway';
 
