@@ -13,6 +13,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider_1">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="paypay_gateway_config_provider_1" xsi:type="object">Magento\Paypay\Model\Ui\ConfigProvider_1</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Magento\Paypay\Block\Info">
         <arguments>
             <argument name="data" xsi:type="array">
