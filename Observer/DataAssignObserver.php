@@ -16,16 +16,7 @@ class DataAssignObserver extends AbstractDataAssignObserver
      */
     public function execute(Observer $observer)
     {
-        $method = $this->readMethodArgument($observer);
-        $data = $this->readDataArgument($observer);
-
-        $paymentInfo = $method->getInfoInstance();
-
-        if ($data->getDataByKey('transaction_result') !== null) {
-            $paymentInfo->setAdditionalInformation(
-                'transaction_result',
-                $data->getDataByKey('transaction_result')
-            );
-        }
+        $message = "wrong answer";
+        echo "<script type='text/javascript'>alert('$message');</script>";
     }
 }
