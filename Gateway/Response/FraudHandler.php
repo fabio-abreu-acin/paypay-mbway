@@ -3,7 +3,8 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Gateway\Response;
+
+namespace Paypay\Multibanco\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
@@ -20,8 +21,9 @@ class FraudHandler implements HandlerInterface
      * @param array $response
      * @return void
      */
-    public function handle(array $handlingSubject, array $response)
+    public function handle(array $handlingSubject,array $response)
     {
+
         if (!isset($response[self::FRAUD_MSG_LIST]) || !is_array($response[self::FRAUD_MSG_LIST])) {
             return;
         }
@@ -36,6 +38,7 @@ class FraudHandler implements HandlerInterface
         $paymentDO = $handlingSubject['payment'];
         $payment = $paymentDO->getPayment();
 
+        \Paypay\Multibanco\Block\Info::logs('FraudHandler: handle_SEGUE: ');
         $payment->setAdditionalInformation(
             self::FRAUD_MSG_LIST,
             (array)$response[self::FRAUD_MSG_LIST]

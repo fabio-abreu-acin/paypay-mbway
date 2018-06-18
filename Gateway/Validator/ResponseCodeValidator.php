@@ -3,15 +3,19 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Gateway\Validator;
+
+namespace Paypay\Multibanco\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
-use Magento\Paypay\Gateway\Http\Client\ClientMock;
+use Paypay\Multibanco\Gateway\Http\Client\Client;
+use Magento\Payment\Gateway\Helper\SubjectReader;
+use Magento\Framework\Exception\PaymentException;
 
 class ResponseCodeValidator extends AbstractValidator
 {
-    const RESULT_CODE = 'RESULT_CODE';
+    private $value_referencia;
+    private $value_order;
 
     /**
      * Performs validation of result code
@@ -26,16 +30,23 @@ class ResponseCodeValidator extends AbstractValidator
         }
 
         $response = $validationSubject['response'];
+        $paymentDO = SubjectReader::readPayment($validationSubject);
+
+        $this->value_order = number_format($paymentDO->getOrder()->getGrandTotalAmount(), '2', '.', ',');
+        $this->value_referencia = number_format($response[0]->valor, '2', '.', ',');
+
 
         if ($this->isSuccessfulTransaction($response)) {
+            $payment = $paymentDO->getPayment();
+            $payment->setIsTransactionClosed(true);
             return $this->createResult(
                 true,
-                []
+                [__('Sucesso')]
             );
         } else {
             return $this->createResult(
                 false,
-                [__('Gateway rejected the transaction.')]
+                [__('Insucesso')]
             );
         }
     }
@@ -46,7 +57,10 @@ class ResponseCodeValidator extends AbstractValidator
      */
     private function isSuccessfulTransaction(array $response)
     {
-        return isset($response[self::RESULT_CODE])
-        && $response[self::RESULT_CODE] !== ClientMock::FAILURE;
+        if (in_array($response[0]->estado_referencia, Client::SUCCESS)
+            && ($this->value_order == $this->value_referencia)) {
+            return true;
+        }
+        return false;
     }
 }

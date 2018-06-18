@@ -1,27 +1,26 @@
 <?php
+
 /**
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Model\Adminhtml\Source;
+
+namespace Paypay\Multibanco\Model\Adminhtml\Source;
 
 use Magento\Payment\Model\Method\AbstractMethod;
 
 /**
  * Class PaymentAction
  */
-class PaymentAction implements \Magento\Framework\Option\ArrayInterface
-{
+class PaymentAction extends AbstractMethod {
+
+    protected $_isInitializeNeeded = true;
+
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
-    {
-        return [
-            [
-                'value' => AbstractMethod::ACTION_AUTHORIZE,
-                'label' => __('Authorize')
-            ]
-        ];
+    public function getConfigPaymentAction() {
+        return ($this->getConfigData('order_status') == 'pending') ? null : parent::getConfigPaymentAction();
     }
+
 }

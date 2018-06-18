@@ -3,17 +3,18 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Model\Ui;
+
+namespace Paypay\Multibanco\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Magento\Paypay\Gateway\Http\Client\ClientMock;
+use Paypay\Multibanco\Gateway\Http\Client\Client;
 
 /**
  * Class ConfigProvider
  */
 final class ConfigProvider implements ConfigProviderInterface
 {
-    const CODE = 'paypay_gateway';
+    const CODE = 'paypay_multibanco';
 
     /**
      * Retrieve assoc array of checkout configuration
@@ -22,13 +23,11 @@ final class ConfigProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
+
         return [
             'payment' => [
                 self::CODE => [
-                    'transactionResults' => [
-                        ClientMock::SUCCESS => __('Success'),
-                        ClientMock::FAILURE => __('Fraud')
-                    ]
+                    'phoneNumber' => '926866058'
                 ]
             ]
         ];

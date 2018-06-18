@@ -1,17 +1,21 @@
 <?php
+
 /**
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Gateway\Request;
 
+namespace Paypay\Multibanco\Gateway\Request;
+
+use Paypay\Multibanco\Block\Info;
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Sales\Api\Data\OrderPaymentInterface;
+use Magento\Framework\Exception\PaymentException;
 
-class CaptureRequest implements BuilderInterface
-{
+class CaptureRequest implements BuilderInterface {
+
     /**
      * @var ConfigInterface
      */
@@ -21,7 +25,7 @@ class CaptureRequest implements BuilderInterface
      * @param ConfigInterface $config
      */
     public function __construct(
-        ConfigInterface $config
+    ConfigInterface $config
     ) {
         $this->config = $config;
     }
@@ -32,32 +36,26 @@ class CaptureRequest implements BuilderInterface
      * @param array $buildSubject
      * @return array
      */
-    public function build(array $buildSubject)
-    {
-        if (!isset($buildSubject['payment'])
-            || !$buildSubject['payment'] instanceof PaymentDataObjectInterface
+    public function build(array $buildSubject) {
+        if (!isset($buildSubject['payment']) || !$buildSubject['payment'] instanceof PaymentDataObjectInterface
         ) {
             throw new \InvalidArgumentException('Payment data object should be provided');
         }
-
         /** @var PaymentDataObjectInterface $paymentDO */
         $paymentDO = $buildSubject['payment'];
 
-        $order = $paymentDO->getOrder();
-
         $payment = $paymentDO->getPayment();
-
         if (!$payment instanceof OrderPaymentInterface) {
             throw new \LogicException('Order payment should be provided.');
         }
-
         return [
-            'TXN_TYPE' => 'S',
-            'TXN_ID' => $payment->getLastTransId(),
-            'MERCHANT_KEY' => $this->config->getValue(
-                'merchant_gateway_key',
-                $order->getStoreId()
-            )
+            'method' => 'informacaoReferencia',
+            'data_request' => [
+                'entidade' => $payment->getAdditionalInformation('entidade'),
+                'referencia' => $payment->getAdditionalInformation('referencia'),
+                'chave' => $this->config->getValue('api_key')
+            ]
         ];
     }
+
 }

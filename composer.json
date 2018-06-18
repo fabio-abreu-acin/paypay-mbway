@@ -1,19 +1,22 @@
 {
-    "name": "paypay/mbway",
-    "description": "Demonstrates integration with payment gateway",
-    "require": {
-        "php": ">=7.0.0"
-    },
-    "type": "magento2-module",
-    "version": "1.0.18",
-    "license": [
-        "OSL-3.0",
-        "AFL-3.0"
+  "name": "paypay/mbway",
+  "description": "Modulo Paypay Multibanco",
+  "homepage": "https://www.paypay.pt",
+  "type": "magento2-module",
+  "require": {
+    "php": "~5.5.22|~5.6.0|~7.0.0|~7.1.0"
+  },
+  "version": "1.0.19",
+  "license": [
+    "proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
     ],
-    "autoload": {
-        "files": [ "registration.php" ],
-        "psr-4": {
-            "Magento\\Paypay\\": ""
-        }
+    "psr-4": {
+     "Paypay\\Multibanco\\": ""
     }
+  },
+  "minimum-stability": "dev"
 }

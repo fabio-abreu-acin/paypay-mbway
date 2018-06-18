@@ -1,40 +1,24 @@
 <?php
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-namespace Magento\Paypay\Block;
+namespace Paypay\Multibanco\Block;
+
 
 use Magento\Framework\Phrase;
-use Magento\Payment\Block\ConfigurableInfo;
-use Magento\Paypay\Gateway\Response\FraudHandler;
+use Magento\Framework\Registry;
 
-class Info extends ConfigurableInfo
+
+class Info extends \Magento\Payment\Block\Info
 {
-    /**
-     * Returns label
-     *
-     * @param string $field
-     * @return Phrase
-     */
-    protected function getLabel($field)
+
+    public function getSpecificInformation()
     {
-        return __($field);
+        $informations['Entidade'] = $this->getInfo()->getAdditionalInformation('entidade');
+        $informations['Referencia'] = $this->getInfo()->getAdditionalInformation('referencia');
+        return (object)$informations;
     }
 
-    /**
-     * Returns value view
-     *
-     * @param string $field
-     * @param string $value
-     * @return string | Phrase
-     */
-    protected function getValueView($field, $value)
+    public function getMethodCode()
     {
-        switch ($field) {
-            case FraudHandler::FRAUD_MSG_LIST:
-                return implode('; ', $value);
-        }
-        return parent::getValueView($field, $value);
+        return $this->getInfo()->getMethodInstance()->getCode();
     }
+
 }

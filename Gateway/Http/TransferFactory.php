@@ -1,27 +1,36 @@
 <?php
+
 /**
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Gateway\Http;
+
+namespace Paypay\Multibanco\Gateway\Http;
 
 use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
-use Magento\Paypay\Gateway\Request\MockDataRequest;
+use Paypay\Multibanco\Gateway\Request\DataRequest;
+use Magento\Framework\Exception\PaymentException;
 
-class TransferFactory implements TransferFactoryInterface
-{
+class TransferFactory implements TransferFactoryInterface {
+
     /**
      * @var TransferBuilder
      */
+    const SERVER = [
+        'dev' => 'wsdl dev',
+        'production' => 'wsdl production'
+    ];
+
     private $transferBuilder;
+    private $api_key;
 
     /**
      * @param TransferBuilder $transferBuilder
      */
     public function __construct(
-        TransferBuilder $transferBuilder
+    TransferBuilder $transferBuilder
     ) {
         $this->transferBuilder = $transferBuilder;
     }
@@ -32,18 +41,25 @@ class TransferFactory implements TransferFactoryInterface
      * @param array $request
      * @return TransferInterface
      */
-    public function create(array $request)
-    {
+    public function create(array $request) {
+        $this->api_key = $request['data_request']['chave'];
         return $this->transferBuilder
-            ->setBody($request)
-            ->setMethod('POST')
-            ->setHeaders(
-                [
-                    'force_result' => isset($request[MockDataRequest::FORCE_RESULT])
-                        ? $request[MockDataRequest::FORCE_RESULT]
-                        : null
-                ]
-            )
-            ->build();
+                        ->setBody($request['data_request'])
+                        ->setMethod($request['method'])
+                        ->setClientConfig(
+                                [
+                                    'wsdl' => $this->getServerURI()
+                                ]
+                        )
+                        ->build();
     }
+
+    private function getServerURI() {
+        $api_key = stripos($this->api_key, 'demo');
+        if ($api_key !== false) {
+            return self::SERVER['dev'];
+        }
+        return self::SERVER['production'];
+    }
+
 }
