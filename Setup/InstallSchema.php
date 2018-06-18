@@ -82,10 +82,10 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                 $setup->getIdxName(
                     $installer->getTable('paypay_payment'),
                     ['id_order','id_payment_paypay','reference','paypayLink','token'],
-                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                    \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
                 ),
                 ['id_order','id_payment_paypay','reference','paypayLink','token'],
-                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
             );
         }
 
