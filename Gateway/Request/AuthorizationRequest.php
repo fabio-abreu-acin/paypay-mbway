@@ -46,35 +46,14 @@ class AuthorizationRequest implements BuilderInterface
         $payment = $buildSubject['payment'];
         $order = $payment->getOrder();
 
-
-        $per_dup = $this->config->getValue('per_dup');
-        $n_dias = $this->config->getValue('payment_deadline');
-
-        if($per_dup != 1 || (is_numeric($n_dias) && $n_dias > 0)) {
-            $data_inicio = date("Y-m-d");
-            $data_fim = (is_numeric($n_dias) && $n_dias > 0) ? date('Y-m-d', strtotime('+' . $n_dias . ' day', strtotime($data_inicio))) : "2099-12-31";
-            $per_dup = ($per_dup == true) ? 1 : 0;
-            $arraydados = [
-                "method" => "gerarReferenciaMBDL",
-                'data_request' => [
-                    'chave' => $this->config->getValue('api_key'),
-                    'valor' => $order->getGrandTotalAmount(),
-                    'id' => $order->getOrderIncrementId(),
-                    "data_inicio"=>$data_inicio,
-                    "data_fim"=>$data_fim,
-                    'per_dup' => $per_dup
-                ]
-            ];
-        } else {
-            $arraydados = [
-                'method' => 'gerarReferenciaMB',
-                'data_request' => [
-                    'chave' => $this->config->getValue('api_key'),
-                    'valor' => $order->getGrandTotalAmount(),
-                    'id' => $order->getOrderIncrementId(),
-                ]
-            ];
-        }
+        $arraydados = [
+            'method' => 'gerarReferenciaMB',
+            'data_request' => [
+                'chave' => $this->config->getValue('api_key'),
+                'valor' => $order->getGrandTotalAmount(),
+                'id' => $order->getOrderIncrementId(),
+            ]
+        ];
 
         return $arraydados;
     }

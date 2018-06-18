@@ -41,15 +41,7 @@
                 <field id="api_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Auth Key</label>
                 </field>
-                <field id="per_dup" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Allow duplicated payments</label>
-                    <comment>Select yes if want give to the costumer the option to allow duplicated payment.</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="payment_deadline" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Payment Deadline</label>
-                    <comment>If want payment deadline, insert the number of days to cancel reference.</comment>
-                </field>
+                
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="130" showInDefault="9"
                        showInWebsite="1" showInStore="0">
                     <label>Payment From Applicable Countries</label>
