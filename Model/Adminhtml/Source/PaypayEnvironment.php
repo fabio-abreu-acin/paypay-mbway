@@ -4,7 +4,7 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Paypay\Model\Adminhtml\Source;
+namespace Paypay\Multibanco\Model\Adminhtml\Source;
 
 use Magento\Payment\Model\Method\AbstractMethod;
 
