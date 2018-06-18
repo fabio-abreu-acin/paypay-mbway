@@ -19,8 +19,13 @@ class TransferFactory implements TransferFactoryInterface {
      * @var TransferBuilder
      */
     const SERVER = [
-        'dev' => 'wsdl dev',
-        'production' => 'wsdl production'
+        'teste' => 'https://paypay.acin.pt/paypaybeta/index.php/paypayservices/paypayservices_c/wsdl',
+        'producao' => 'https://www.paypay.pt/paypay/index.php/paypayservices/paypayservices_c/wsdl'
+    ];
+
+    const URL = [
+        'teste' => 'https://paypay.acin.pt/paypaybeta/index.php/paypayservices/paypayservices_c/server',
+        'producao' => 'https://www.paypay.pt/paypay/index.php/paypayservices/paypayservices_c/server'
     ];
 
     private $transferBuilder;
@@ -60,6 +65,35 @@ class TransferFactory implements TransferFactoryInterface {
             return self::SERVER['dev'];
         }
         return self::SERVER['production'];
+    }
+
+    public function geraPagamento()
+    {
+        $classmap = array(
+            'RequestEntity' => 'RequestEntity',
+            'ResponseIntegrationState' => 'ResponseIntegrationState',
+            'RequestInterval' => 'RequestInterval',
+            'RequestPaymentReference' => 'RequestPaymentReference',
+            'ResponseEntityPayments' => 'ResponseEntityPayments',
+            'ResponseEntityPaymentReferences' => 'ResponseEntityPaymentReferences',
+            'RequestCreditCardPayment' => 'RequestCreditCardPayment',
+            'ResponseCreditCardPayment' => 'ResponseCreditCardPayment',
+            'RequestReferenceDetails' => 'RequestReferenceDetails',
+            'ResponseGetPayment' => 'ResponseGetPayment',
+            'RequestPaymentOrder' => 'RequestPaymentOrder',
+            'RequestWebhook' => 'RequestWebhook',
+            'RequestPayment' => 'RequestPayment'
+
+        );
+
+        $options = array(
+            'classmap' => $classmap,
+            'location' => Configuration::get("WEBSERVICEURL"),
+            'cache_wsdl' => WSDL_CACHE_NONE
+        );
+
+
+        
     }
 
 }

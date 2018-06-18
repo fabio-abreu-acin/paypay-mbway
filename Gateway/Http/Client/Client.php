@@ -11,6 +11,7 @@ use Magento\Payment\Gateway\Http\ClientInterface;
 use Magento\Payment\Gateway\Http\ConverterInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Magento\Payment\Model\Method\Logger;
+use Paypay\Multibanco\Structure;
 
 /**
  * Class Soap
@@ -60,14 +61,38 @@ class Client implements ClientInterface
      */
     public function placeRequest(TransferInterface $transferObject)
     {
+        $config = \PayPay\Configuration::setup(
+            array(
+                'environment' => 'testing', // or production
+                'platformCode' => '0004',
+                'privateKey' => 'Y1JgnTGN2lMOz8OXLs0s',
+                'clientId' => '503129445', // usually the client NIF
+                'langCode' => 'PT'
+            )
+        );
 
-        $client = $this->clientFactory->create($transferObject->getClientConfig()['wsdl'], ['trace' => true]);
+        $client = \PayPay\PayPayWebservice::init($config);
+        
         try {
-            $client->__setSoapHeaders($transferObject->getHeaders());
-            $response = $client->__soapCall($transferObject->getMethod(), [$transferObject->getBody()]);
-            $result = $this->converter ? $this->converter->convert($response) : [$response];
-        } catch (\Exception $e) {
-            throw $e;
+            $order = new \PayPay\Multibanco\Structure\RequestPaymentOrder(
+                array(
+                    'amount' => 1000,
+                    'productCode' => 'REF123', // Optional 
+                    'productDesc' => 'Product description' // Optional
+                )
+            );
+            $requestPayment = new \PayPay\Multibanco\Structure\RequestCreditCardPayment(
+                $order,
+                'http://www.your_store_url.com/return',
+                'http://www.your_store_url.com/cancel', /// optional 
+                \PayPay\Multibanco\Structure\RequestCreditCardPayment::METHOD_CREDIT_CARD // default is credit card, other methods are available
+            );
+
+            $result = $client->doWebPayment($requestPayment);
+            // save $response->token and $response->idTransaction
+            // redirect to $response->url
+        } catch (Exception $e) {
+            $result = $e;
         }
         return $result;
     }
