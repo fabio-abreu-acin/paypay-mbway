@@ -20,12 +20,12 @@ class PaypayEnvironment implements \Magento\Framework\Option\ArrayInterface
     {
         return [
             [
-                'value' => "test",
-                'label' => __('Test')
+                'value' => "testing",
+                'label' => __('testing')
             ],
             [
                 'value' => "production",
-                'label' => __('Production')
+                'label' => __('production')
             ]
         ];
     }

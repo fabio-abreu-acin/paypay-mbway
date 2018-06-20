@@ -6,12 +6,13 @@
 
 namespace Paypay\Multibanco\Gateway\Http\Client;
 
-use Magento\Framework\Webapi\Soap\ClientFactory;
+use Magento\Framework\UrlInterface;
 use Magento\Payment\Gateway\Http\ClientInterface;
 use Magento\Payment\Gateway\Http\ConverterInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Magento\Payment\Model\Method\Logger;
-use Paypay\Multibanco\Structure;
+
+require 'vendor/autoload.php';
 
 /**
  * Class Soap
@@ -37,14 +38,20 @@ class Client implements ClientInterface
      * @var ClientFactory
      */
     private $clientFactory;
+    /**
+     * @var UrlInterface
+     */
+    private $urlBuilder;
 
     /**
+     * @param UrlInterface
      * @param Logger $logger
      * @param ClientFactory $clientFactory
      * @param ConverterInterface | null $converter
      */
-    public function __construct(Logger $logger, ClientFactory $clientFactory, ConverterInterface $converter = null)
+    public function __construct(UrlInterface $urlBuilder, Logger $logger, ClientFactory $clientFactory, ConverterInterface $converter = null)
     {
+        $this->urlBuilder = $urlBuilder;
         $this->logger = $logger;
         $this->converter = $converter;
         $this->clientFactory = $clientFactory;
@@ -60,13 +67,13 @@ class Client implements ClientInterface
      * @throws \Exception
      */
     public function placeRequest(TransferInterface $transferObject)
-    {
+    {        
         $config = \PayPay\Configuration::setup(
             array(
-                'environment' => 'testing', // or production
-                'platformCode' => '0004',
-                'privateKey' => 'Y1JgnTGN2lMOz8OXLs0s',
-                'clientId' => '503129445', // usually the client NIF
+                'environment' => $transferObject->getClientConfig()['environment'], 
+                'platformCode' => $transferObject->getClientConfig()['code'],
+                'privateKey' => $transferObject->getClientConfig()['key'],
+                'clientId' => $transferObject->getClientConfig()['vat'], // usually the client NIF
                 'langCode' => 'PT'
             )
         );
@@ -74,21 +81,21 @@ class Client implements ClientInterface
         $client = \PayPay\PayPayWebservice::init($config);
         
         try {
-            $order = new \PayPay\Multibanco\Structure\RequestPaymentOrder(
+            $order = new \PayPay\Structure\RequestPaymentOrder(
                 array(
-                    'amount' => 1000,
-                    'productCode' => 'REF123', // Optional 
-                    'productDesc' => 'Product description' // Optional
+                    'amount' => $transferObject->getClientConfig()['amount'],
+                    'productCode' => $transferObject->getClientConfig()['idOrder'], // Optional 
                 )
             );
-            $requestPayment = new \PayPay\Multibanco\Structure\RequestCreditCardPayment(
+            $requestPayment = new \PayPay\Structure\RequestCreditCardPayment(
                 $order,
-                'http://www.your_store_url.com/return',
-                'http://www.your_store_url.com/cancel', /// optional 
-                \PayPay\Multibanco\Structure\RequestCreditCardPayment::METHOD_CREDIT_CARD // default is credit card, other methods are available
+                $this->urlBuilder->getUrl('checkout', ['_secure' => true]),
+                '', /// optional 
+                \PayPay\Structure\RequestCreditCardPayment::METHOD_CREDIT_CARD // default is credit card, other methods are available
             );
 
-            $result = $client->doWebPayment($requestPayment);
+            $response = $client->doWebPayment($requestPayment);
+            $result = $this->converter ? $this->converter->convert($response) : [$response];
             // save $response->token and $response->idTransaction
             // redirect to $response->url
         } catch (Exception $e) {
@@ -96,5 +103,4 @@ class Client implements ClientInterface
         }
         return $result;
     }
-
 }

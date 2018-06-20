@@ -32,18 +32,15 @@ class TxnIdHandler implements HandlerInterface
         $paymentDO = $handlingSubject['payment'];
         $payment = $paymentDO->getPayment();
         $order = $paymentDO->getOrder();
-        if (isset($response->referencia)) {
-            $payment->setAdditionalInformation('entidade', $response->entidade);
-            $payment->setAdditionalInformation('referencia', $response->referencia);
-            $payment->setAdditionalInformation('data_limite', $response->data_fim);
+        $payment->setAdditionalInformation('url', $response->url);
+        $payment->setAdditionalInformation('token', $response->token);
+        $payment->setAdditionalInformation('idTransaction', $response->idTransaction);
+        /*if (isset($response->referencia)) {
+            $payment->setAdditionalInformation('entidade', 'testee');
+            $payment->setAdditionalInformation('referencia', 'testee');
+            $payment->setAdditionalInformation('data_limite', 'testee');
             // $payment->setTransactionAdditionalInfo(\Magento\Sales\Model\Order\Payment\Transaction::RAW_DETAILS, $this->getDetails($response));
             $payment->setTransactionId($payment->getAdditionalInformation('referencia'));
-        }
-        $payment->setIsTransactionClosed(false);
-        if (isset($response->estado_referencia) &&
-            in_array($response->estado_referencia, Client::SUCCESS) &&
-            $response->valor == $order->getGrandTotalAmount()) {
-            $payment->setIsTransactionClosed(true);
-        }
+        }*/
     }
 }

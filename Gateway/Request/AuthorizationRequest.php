@@ -47,12 +47,12 @@ class AuthorizationRequest implements BuilderInterface
         $order = $payment->getOrder();
 
         $arraydados = [
-            'method' => 'gerarReferenciaMB',
-            'data_request' => [
-                'chave' => $this->config->getValue('api_key'),
-                'valor' => $order->getGrandTotalAmount(),
-                'id' => $order->getOrderIncrementId(),
-            ]
+            'environment' => $this->config->getValue('paypay_environment'),
+            'key' => $this->config->getValue('paypay_key'),
+            'code' => $this->config->getValue('paypay_code'),
+            'vat' => $this->config->getValue('paypay_vat'),
+            'amount' => number_format($order->getGrandTotalAmount(), 2, '', ''),
+            'idOrder' => $order->getOrderIncrementId(),            
         ];
 
         return $arraydados;
